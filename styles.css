@@ -1,0 +1,17 @@
+/* Linear gradient as background image to have eye catching feel */
+body{
+    /* background-image : linear-gradient(to top left,#9D44C0 ,#4d2db7 ) ; */
+}
+
+/* Container section where the actual app rests */
+
+/* Container */
+
+#container{
+    margin-top:50px ;
+    margin-left: auto;
+    width:75vw;
+    height: 75vh;
+    background-color: beige;
+
+}
