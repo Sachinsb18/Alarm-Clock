@@ -20,6 +20,7 @@ body{
     box-shadow:  5px 5px 5px #9d44c0;
     color:beige;
     font-family: 'Times New Roman', Times, serif;
+    border-radius: 15px;
     
 }
 
@@ -43,35 +44,46 @@ body{
 .button{
     padding: 0.5em;
     background: none;
+    border: none;
+}
+
+.button:hover{
+    cursor: pointer;
 }
 
 /* Alarm Adding Form */
-.alarmForm{
-    width: 400px;
-    height: auto;
+#alarmForm{
+    width: 450px;
+    height: 375px;
     border: 2px solid grey;
-    margin-right: 20px;
+    margin-left: 20vw;
+    background-color: rgb(5, 66, 127);
+    display: none;
 }
 
-#myAlarm{
-   
-}
-
-#name{
+#name,#hour,#minutes,#seconds{
     background: none;
     color: bisque;
     font-size: 1rem;
 }
 
-#alarmTime{
-    /* margin-left: 150px; */
-    margin-top: 20px;
-    font-size: 1.2rem;
-    background: none;
+#myAlarm{
+    padding:5px;
 }
 
 .ok{
     border: 1px solid grey;
     border-radius: 10%;
     margin-left:20px;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+#alaramList{
+    width: 100%;
+}
+
+#alarmList>button{
+    background: none;
+    font-size: 1rem;
 }

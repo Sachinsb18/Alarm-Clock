@@ -23,24 +23,37 @@
                     </span>
                 </p>   
             </div>
-            <div class="alarmForm">
+            <div id="alarmForm">
                 <form id="myAlram">
                     <br>
                     <label for="name">Alarm Name:</label>
                     <input type="text" id="name" name="alarmName" required>
                     <br><br>
-                    <label for="alarmTime">Set Alarm:</label>
-                    <input type="time" id="alarmTime" required>
+                    <label for="hour">Hour (12hr-format):</label>
+                    <input type="number" id="hour" max="12" min="1" required>
                     <br><br>
-                    <buttton type="button" id="set" class="button ok">SET</buttton>
-                    <buttton type="button" id="cancel" class="button ok">CLOSE</buttton>
+                    <label for="minutes">Minutes (0-60 min):</label>
+                    <input type="number" id="minutes" max="60" min="0" required>
+                    <br><br>
+                    <label for="seconds">Seconds (0-60 sec):</label>
+                    <input type="number" id="seconds" max="60" min="0" required>
+                    <br><br>
+                   
+                    <label><input type="radio" name="ampm" value="am" id="am">AM</label>                    
+                    <label><input type="radio" name="ampm" value="pm" id="pm" checked>PM</label>
+                    <br><br>
+                    <button type="button" id="set" class="button ok">SET</button>
+                    <button type="button" id="cancel" class="button ok">CLOSE</button>
                 </form>
             </div>
         </div>
+    
+         <div id="alarmList"> </div>
+        
 
 
     </div>
-    <!-- <i class="fa-solid fa-trash"></i> -->
+    
     
 </body>
 <script src="app.js"></script>
