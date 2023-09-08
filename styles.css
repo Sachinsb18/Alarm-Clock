@@ -1,6 +1,10 @@
 /* Linear gradient as background image to have eye catching feel */
+
+
 body{
-    /* background-image : linear-gradient(to top left,#9D44C0 ,#4d2db7 ) ; */
+     background-image : radial-gradient(#9D44C0 ,#4d2db7 ) ; 
+    /* background-color: beige; */
+    margin:0 0;
 }
 
 /* Container section where the actual app rests */
@@ -8,10 +12,66 @@ body{
 /* Container */
 
 #container{
-    margin-top:50px ;
-    margin-left: auto;
-    width:75vw;
-    height: 75vh;
-    background-color: beige;
+    /*  #ecf0f1f5*/
+    margin:50px auto 0 auto;
+    width:75vw;    
+    height: auto;
+    border:3px solid black;
+    box-shadow:  5px 5px 5px #9d44c0;
+    color:beige;
+    font-family: 'Times New Roman', Times, serif;
+    
+}
 
+#time-display{
+    text-align: center;
+    margin:10px auto 0 auto;
+    font-size: 2rem;
+}
+
+#time-zone{
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 5px;
+}
+
+.alarm{
+    font-size: 1.5rem;
+    margin-left:5px;
+}
+
+.button{
+    padding: 0.5em;
+    background: none;
+}
+
+/* Alarm Adding Form */
+.alarmForm{
+    width: 400px;
+    height: auto;
+    border: 2px solid grey;
+    margin-right: 20px;
+}
+
+#myAlarm{
+   
+}
+
+#name{
+    background: none;
+    color: bisque;
+    font-size: 1rem;
+}
+
+#alarmTime{
+    /* margin-left: 150px; */
+    margin-top: 20px;
+    font-size: 1.2rem;
+    background: none;
+}
+
+.ok{
+    border: 1px solid grey;
+    border-radius: 10%;
+    margin-left:20px;
 }

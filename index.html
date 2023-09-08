@@ -3,13 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="styles.css" rel="stylesheet">
     <title>AlarmClock</title>
 </head>
 <body>
     <div id="container">
+        <div class="time">            
+            <div id="time-display"> 00 : 00 : 00 </div>
+            <div id="time-zone">Time-Zone</div>
+        </div>
+        <div class="alarm">
+            <div id="addAlarm">
+                <p>Add Your Alarm Here
+                    <span>
+                        <button id="alarmButton" class="button plus-button">
+                            <i class="fa-solid fa-plus fa-2x"></i>
+                        </button>
+                    </span>
+                </p>   
+            </div>
+            <div class="alarmForm">
+                <form id="myAlram">
+                    <br>
+                    <label for="name">Alarm Name:</label>
+                    <input type="text" id="name" name="alarmName" required>
+                    <br><br>
+                    <label for="alarmTime">Set Alarm:</label>
+                    <input type="time" id="alarmTime" required>
+                    <br><br>
+                    <buttton type="button" id="set" class="button ok">SET</buttton>
+                    <buttton type="button" id="cancel" class="button ok">CLOSE</buttton>
+                </form>
+            </div>
+        </div>
+
 
     </div>
+    <!-- <i class="fa-solid fa-trash"></i> -->
     
 </body>
+<script src="app.js"></script>
 </html>
