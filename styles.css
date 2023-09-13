@@ -1,89 +1,140 @@
-/* Linear gradient as background image to have eye catching feel */
-
+/*  background image to have eye catching feel  */
 
 body{
-     background-image : radial-gradient(#9D44C0 ,#4d2db7 ) ; 
-    /* background-color: beige; */
-    margin:0 0;
+    background-image: url('sunrise.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    
 }
 
 /* Container section where the actual app rests */
 
-/* Container */
+/* the outer box design */
 
-#container{
-    /*  #ecf0f1f5*/
-    margin:50px auto 0 auto;
-    width:75vw;    
+#container{    
+    margin:20px auto 0 auto;
+    width:40vw;    
     height: auto;
-    border:3px solid black;
-    box-shadow:  5px 5px 5px #9d44c0;
-    color:beige;
+    border:3px solid rgb(255, 224, 152);
+    box-shadow:  5px 5px 5px #fff3ac;
+    color:azure;
     font-family: 'Times New Roman', Times, serif;
-    border-radius: 15px;
+    border-radius: 25px;
+    box-sizing: border-box;
     
 }
 
-#time-display{
-    text-align: center;
-    margin:10px auto 0 auto;
-    font-size: 2rem;
+/*  container for showing current time and date */
+.time{
+    height: 300px;
+    width: 300px;
+    box-shadow: rgba(255, 255, 255, 0.4) 0px 0px 0px 2px, rgba(29, 220, 245, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.5) 0px 1px 0px inset;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1.2rem auto;
 }
 
-#time-zone{
-    text-align: center;
+#days{
     font-size: 1.5rem;
+    margin:0 auto;
+
+}
+
+#date{
+    font-size: 1.5rem;
+    margin:3% 0;
+}
+
+#time-display{    
+    margin:10px auto 0 auto;
+    font-size: 2.5rem;
+}
+
+#time-zone{    
+    font-size: 1.4rem;
     margin-top: 5px;
 }
 
-.alarm{
-    font-size: 1.5rem;
-    margin-left:5px;
+
+/* Alarm adding Section */
+
+#lower-section{
+    margin-top: 2px;
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 6%;
 }
 
+/* alarm input section */
+#lower-section #input-alarm{
+    height: 50%;
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 1%;
+}
+
+/* styling the input box */
+#lower-section #input-alarm select{
+    height: 100%;
+    width: 20%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    background: transparent;
+    color:bisque;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+/* add alarm button */
+#add-alarm{
+    height: 50%;
+    width: 80%;
+    margin: 5% ;
+    border: none;    
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    position: relative;
+    border-radius: 5px;
+    justify-content: center;
+    color:blanchedalmond;
+}
+
+#add-alarm:hover{
+    transform: scale(1.05);
+}
+
+/* set alarm list styling */
+
+.alarm{
+    font-size: 2rem;
+    margin-left:5%;
+    line-height: 1.5;
+    color:black;
+    position: relative;
+}
+
+/* styling for delete button */
 .button{
     padding: 0.5em;
     background: none;
     border: none;
+    margin-left: 25%;
+    position: absolute;
 }
 
 .button:hover{
     cursor: pointer;
-}
-
-/* Alarm Adding Form */
-#alarmForm{
-    width: 450px;
-    height: 375px;
-    border: 2px solid grey;
-    margin-left: 20vw;
-    background-color: rgb(5, 66, 127);
-    display: none;
-}
-
-#name,#hour,#minutes,#seconds{
-    background: none;
-    color: bisque;
-    font-size: 1rem;
-}
-
-#myAlarm{
-    padding:5px;
-}
-
-.ok{
-    border: 1px solid grey;
-    border-radius: 10%;
-    margin-left:20px;
-    font-size: 1.2rem;
-    font-weight: 500;
-}
-
-#alaramList{
-    width: 100%;
-}
-
-#alarmList>button{
-    background: none;
-    font-size: 1rem;
+    transform: scale(1.1);
 }

@@ -3,58 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Including font-awesome library for the icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- including the custom style sheet -->
     <link href="styles.css" rel="stylesheet">
     <title>AlarmClock</title>
 </head>
 <body>
+    
+    <!-- Alarm container  -->
     <div id="container">
-        <div class="time">            
+
+        <!-- container for current time and date -->
+        <div class="time">             
+            <div id="date">dd/mm/yyyy</div>
+            <div id="days">Day </div>            
             <div id="time-display"> 00 : 00 : 00 </div>
             <div id="time-zone">Time-Zone</div>
         </div>
-        <div class="alarm">
-            <div id="addAlarm">
-                <p>Add Your Alarm Here
-                    <span>
-                        <button id="alarmButton" class="button plus-button">
-                            <i class="fa-solid fa-plus fa-2x"></i>
-                        </button>
-                    </span>
-                </p>   
-            </div>
-            <div id="alarmForm">
-                <form id="myAlram">
-                    <br>
-                    <label for="name">Alarm Name:</label>
-                    <input type="text" id="name" name="alarmName" required>
-                    <br><br>
-                    <label for="hour">Hour (12hr-format):</label>
-                    <input type="number" id="hour" max="12" min="1" required>
-                    <br><br>
-                    <label for="minutes">Minutes (0-60 min):</label>
-                    <input type="number" id="minutes" max="60" min="0" required>
-                    <br><br>
-                    <label for="seconds">Seconds (0-60 sec):</label>
-                    <input type="number" id="seconds" max="60" min="0" required>
-                    <br><br>
-                   
-                    <label><input type="radio" name="ampm" value="am" id="am">AM</label>                    
-                    <label><input type="radio" name="ampm" value="pm" id="pm" checked>PM</label>
-                    <br><br>
-                    <button type="button" id="set" class="button ok">SET</button>
-                    <button type="button" id="cancel" class="button ok">CLOSE</button>
-                </form>
-            </div>
-        </div>
-    
-         <div id="alarmList"> </div>
         
+        <!-- Inputs for the alarm  -->
 
+        <div >
+            <section id="lower-section">           
 
-    </div>
+                <div id="input-alarm">
     
+                    <select id="getUserHours" type="number"  required>00</select>
+                    <select id="getUserMinutes" type="number"  >00</select>
+                    <select id="getUserSeconds" type="number"  >00</select>
+                    <select required name="am-pm" id="am-pm">
+                        <option value="AM" selected>AM</option>
+                        <option value="PM">PM</option>
+                    </select>
     
+                </div>
+
+                <!-- button to add set alarms to the list -->
+
+                <button id="add-alarm" class="button">Add Alarm</button>
+
+            </section>
+    
+        </div>       
+    
+        <!-- To show the list of set alarms -->
+
+         <div id="alarmList" class="alarm"> </div>
+
+    </div> 
 </body>
+<!-- including the js file -->
 <script src="app.js"></script>
+
 </html>

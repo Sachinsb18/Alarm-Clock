@@ -1,25 +1,59 @@
+//  Tapping into each of the required elemnts via DOM manipulation functions
 const time = document.getElementById("time-display");
 const zone = document.getElementById("time-zone");
-const addButton = document.getElementById("alarmButton");
-const setButton = document.getElementById("set");
-const closeButton = document.getElementById("cancel");
-const form = document.getElementById("alarmForm");
+const addButton = document.getElementById("add-alarm");
+const setHours = document.getElementById("getUserHours");
+const setMinutes = document.getElementById("getUserMinutes");
+const setSeconds = document.getElementById("getUserSeconds");
+const setAmPm = document.getElementById("am-pm");
+const form = document.getElementById("input-alarm");
 const show = document.getElementById("alarmList");
+const currentDay = document.getElementById("days");
+const currentDate = document.getElementById("date");
+
+// Declaring the variables needed in global space
 let alarms = [];
 let hrValue;
 let minValue;
 let secValue;
 let amPm;
-let aName;
+const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
+
+// Adding dropdown values for alarm input fields
+window.addEventListener("DOMContentLoaded", () => {
+   
+  dropDownMenu(0, 12, setHours);
+ 
+  dropDownMenu(0, 59, setMinutes);
+
+  dropDownMenu(0, 59, setSeconds);
+
+});
+
+// Function to add dropdown values for each input field
+function dropDownMenu(start, end, element) {
+  for (let i = start; i <= end; i++) {
+    const dropDown = document.createElement("option");
+    dropDown.value = i < 10 ? "0" + i : i;
+    dropDown.innerHTML = i < 10 ? "0" + i : i;
+    element.appendChild(dropDown);
+  }
+}
+
+//  function to display the current time on the screen
 
 function startTime() {
     const today = new Date();
     let hour = today.getHours();
     let minutes = today.getMinutes();
-    let seconds = today.getSeconds();
+    let seconds = today.getSeconds(); 
+    let dd = today.getDate();
+    let mm = today.getMonth();
+    let yyyy = today.getFullYear();   
     let timeZone =  Intl.DateTimeFormat().resolvedOptions().timeZone;
     const ampm = hour >= 12 ? 'PM' : 'AM';   // To set AM or PM
+    
     // To have 12 hour time format
     hour = hour % 12;
     hour = hour ? hour : 12; // the hour 0 should be 12
@@ -28,125 +62,132 @@ function startTime() {
     hour = append(hour);
     minutes = append(minutes);
     seconds = append(seconds); 
-    //  Setting time on screen.
+
+    //  Setting time and date on screen.
+    currentDay.innerHTML = weekday[today.getDay()];
+    currentDate.innerHTML = dd + ' / ' + mm + ' / ' + yyyy;
     time.innerHTML =  hour + " : " + minutes + " : " + seconds + " " + ampm;
     zone.innerHTML = "Time- Zone : " + timeZone;
-    setInterval(startTime, 1000);
+
+    checkAlarms(hour, minutes, seconds, ampm); // To check the alarms every second
+
+    setInterval(startTime, 1000);  // To update the current time with the local time every second
+
   }
  
-  startTime();
+  startTime();  // calling the starttime function 1st time on load
 
   // Function to append 0 before hour, minutes and seconds which are less than 10
 
-   function append  (data){
-    data = data < 10 ? "0" + data : data;
+   function append (data){
+    data = data < 10 ? "0" + data : data;    
     return data;
   }
 
-  //  Adding Event handlers to the button
 
-  //  Binding event to add alarm button
-  addButton.addEventListener('click',function(){
-    // Toggle the visibility of the form
-    if(form.style.display === 'none' || form.style.display === ''){
-      clearFormFields(form);          // to get a fresh form
-      form.style.display = 'block';
-    }else{
-      
-      form.style.display = 'none';
-    }
-  });
 
-  //  function to clear all the previous alarm inputs and render a fresh form
-  function clearFormFields(form) {
-    const formInputs = form.querySelectorAll('input');
-    formInputs.forEach(input => {
-        if (input.type !== 'submit') {
-            input.value = '';
-        }
-    });
+ //  Binding event to set button
+  addButton.addEventListener("click",function(){
+  // getting alarm value
+  hrValue = setHours.value;
+  minValue = setMinutes.value;  
+  secValue = setSeconds.value;  
+  amPm =setAmPm.value;
+
+  // check if vales are in the range
+  if(hrValue >12 || hrValue < 1 || minValue > 60 || minValue < 0 || secValue > 60 || secValue < 0){
+    alert("Enter the valid time inputs");
+    return;
   }
-  //  Binding event to set button
-  setButton.addEventListener("click",function(){
-    // getting alarm value
-    aName = document.getElementById("name").value;
-    //console.log(aName);
-    hrValue = document.getElementById("hour").value;
-    //console.log(hrValue);
-    minValue = document.getElementById("minutes").value;
-    //console.log(minValue);
-    secValue = document.getElementById("seconds").value;
-    //console.log(secValue);
-    if(document.getElementById("am").checked === true){
-      amPm = 'am';
-    }else{
-      amPm = 'pm';
-    }    
-    //console.log(amPm);
-    // check if vales are in the range
-    if(hrValue >12 || hrValue < 1 || minValue > 60 || minValue < 0 || secValue > 60 || secValue < 0){
-      alert("Enter the valid time inputs");
-    }
-    // check if the alarm vale is empty or not
-    if(hrValue !== '' && minValue !== '' && secValue !== ''){
-      // to append 0 before hour,minutes and seconds
-      hrValue = append(hrValue);
-      minValue = append(minValue);
-      secValue = append(secValue);
+  // check if the alarm vale is empty or not
+  if(hrValue !== '' && minValue !== '' && secValue !== ''){    
 
-      // pushing alarms into array as objects
-        alarms.push({
-          id:alarms.length,
-          name : aName,
-          hour : hrValue,
-          minute : minValue,
-          second : secValue,
-          ampm : amPm
-        });
-    }
+    // pushing alarms into array as objects
+      alarms.push({
+        id:alarms.length+1,
+        hour : hrValue,
+        minute : minValue,
+        second : secValue,
+        ampm : amPm,
+        alerted : false
+      });
+  }
+  
+    showAlarms();  // calling showAlarms function to display the set alarms on the screen
 
-    // console.log(alarms);
-    // To hide the alarm form
-    form.style.display = 'none';
-    showAlarms();  // call to show the created alaram on screen
+    
+    clearFormFields();
   });
 
-  // Binding event to close button
-  closeButton.addEventListener("click",function(){
-    form.style.display = 'none';
-  });
+  //  function to clear all the previous alarm inputs and render a fresh inputs 
 
-  //  Displaying the set alarms
-   function showAlarms(){
-    if(alarms.length !== 0){
-      let wrapper = document.createElement('div');
-      let showAlarmList = document.createElement('div');
-      
-         // Create a trash icon button for each entry using Font Awesome
-         const deleteButton = document.createElement('button');
-         deleteButton.innerHTML = '  <i class="fa-solid fa-trash"></i> ';
-         deleteButton.classList.add('button');
-         deleteButton.setAttribute( 'onclick="del(${alarms.length}")');
+  function clearFormFields() {
+
+    //  To rest dropdown values to show zero
+    setHours.innerHTML = "00";
+    setMinutes.innerHTML = "00";
+    setSeconds.innerHTML = "00";
+
+    // To set the dropdown value to each input fields
+    dropDownMenu(0, 12, setHours);
  
-         deleteButton.addEventListener('click', function() {
-             // Remove the corresponding entry when the delete button is clicked
-             alarms.splice(index, 1);
-             showAlarms(); // Re-display the data after deletion
-         });
+    dropDownMenu(0, 59, setMinutes);
 
-      for(let i=0;i<alarms.length;i++){
-        showAlarmList.innerHTML = alarms[i].name + " &nbsp&nbsp&nbsp" + alarms[i].hour + " : "+ alarms[i].minute + " : " + alarms[i].second + "  " +  alarms[i].ampm;
+    dropDownMenu(0, 59, setSeconds);
+  }
 
-        
-        wrapper.appendChild(showAlarmList);
-        wrapper.appendChild(deleteButton);
+//  function for displaying the set alarms list
 
-        show.appendChild(wrapper);
-      }
-    }    
-   }
+  function showAlarms(){
 
+    show.innerHTML = "";   // To Clear the list before re-rendering
    
+    // Looping through the alarms and showing them on the screen
+
+    alarms.forEach((alarm) => {
+      let showAlarmList = document.createElement('div');
+      showAlarmList.innerHTML =  `${alarm.hour} : ${alarm.minute} : ${alarm.second}   ${alarm.ampm} `;
+      
+        // Creating a delete button with a trash icon
+        const deleteButton = document.createElement("button");
+        deleteButton.classList.add("button");
+        deleteButton.innerHTML = '<i class="fas fa-trash fa-2x"></i>';
+        deleteButton.addEventListener("click", () => {
+            deleteAlarm(alarm.id);
+        });
+
+        showAlarmList.appendChild(deleteButton);    // binding the button at the end of each alarm list    
+        show.appendChild(showAlarmList);        //binding the current alarm to the previously added alarm 
+    });    
+  }    
 
 
+ // Function to delete an alarm by ID
 
+ function deleteAlarm(id) {
+  alarms = alarms.filter((alarm) => alarm.id !== id); // creating a new array that excludes the alarm with the specified ID by this method
+  showAlarms(); // Re-render the updated list
+  }
+
+
+  // Function to track the alarm  and notify the user if the time same as current time
+
+  function checkAlarms(currentHour, currentMinute, currentSecond, ampm) {     
+  
+    // To get the curren time in typeof numbers, we need to parse them into a number
+    currentHour = parseInt(currentHour);
+    currentMinute = parseInt(currentMinute);
+    currentSecond = parseInt(currentMinute);     
+    
+    //  looping through the array object to check the alarm
+    alarms.forEach((alarm) => {    
+
+      // Condition to check if set time is equal to current time
+      if(parseInt(alarm.hour) === currentHour && parseInt(alarm.minute) === currentMinute && parseInt (alarm.second) <= currentSecond && alarm.ampm === ampm && !alarm.alerted) {
+          window.alert("time is up");
+          alarm.alerted = true; // to prevent alert to pop continuously
+      }
+    });
+
+  }
+  
