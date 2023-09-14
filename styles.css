@@ -15,8 +15,8 @@ body{
     margin:20px auto 0 auto;
     width:40vw;    
     height: auto;
-    border:3px solid rgb(255, 224, 152);
-    box-shadow:  5px 5px 5px #fff3ac;
+    border:1px solid rgb(255, 224, 152);
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
     color:azure;
     font-family: 'Times New Roman', Times, serif;
     border-radius: 25px;
